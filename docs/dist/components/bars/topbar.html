@@ -104,15 +104,16 @@ tabs<span class="token punctuation">.</span><span class="token function">push<sp
                         that tabs don&quot;t do anything by default, so what happens at <code>onselect</code> is completely up to you.</p>
                     <h3><span>Updating tabs</span></h3>
                     <p>We can at any time change what happens when a tab gets selected. We can also change the tab label if we like, although maybe this would be confusing for the user.</p>
-                    <figure data-ts="DoxScript" class="runnable" data-ts.code="var%20tabs%20%3D%20ts.ui.TopBar.tabs()%3B%0Atabs%5B4%5D.label%20%3D%20&apos;Choose%20Me!&apos;%3B%0Atabs%5B4%5D.onselect%20%3D%20function()%20%7B%0A%09this.label%20%3D%20&apos;Thanks!&apos;%3B%0A%7D%3B">
+                    <figure data-ts="DoxScript" class="runnable" data-ts.code="var%20tabs%20%3D%20ts.ui.TopBar.tabs()%3B%0Avar%20last%20%3D%20tabs.length%20-%201%3B%0Atabs%5Blast%5D.label%20%3D%20&apos;Choose%20Me!&apos;%3B%0Atabs%5Blast%5D.onselect%20%3D%20function()%20%7B%0A%09this.label%20%3D%20&apos;Thanks!&apos;%3B%0A%7D%3B">
                         <script type="runnable">
-                            var tabs = ts.ui.TopBar.tabs(); tabs[4].label = 'Choose Me!'; tabs[4].onselect = function() { this.label = 'Thanks!'; };
+                            var tabs = ts.ui.TopBar.tabs(); var last = tabs.length - 1; tabs[last].label = 'Choose Me!'; tabs[last].onselect = function() { this.label = 'Thanks!'; };
                         </script><input type="hidden" value="%7B%22show%22%3Atrue%2C%22outs%22%3Afalse%2C%22runs%22%3Atrue%2C%22flip%22%3Afalse%7D">
                         <div class="tabpanels">
                             <pre class="prism language-javascript">
 <code><span class="token keyword">var</span> tabs <span class="token operator">=</span> ts<span class="token punctuation">.</span>ui<span class="token punctuation">.</span>TopBar<span class="token punctuation">.</span><span class="token function">tabs<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-tabs<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">.</span>label <span class="token operator">=</span> <span class="token string">&apos;Choose Me!&apos;</span><span class="token punctuation">;</span>
-tabs<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">.</span>onselect <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">var</span> last <span class="token operator">=</span> tabs<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+tabs<span class="token punctuation">[</span>last<span class="token punctuation">]</span><span class="token punctuation">.</span>label <span class="token operator">=</span> <span class="token string">&apos;Choose Me!&apos;</span><span class="token punctuation">;</span>
+tabs<span class="token punctuation">[</span>last<span class="token punctuation">]</span><span class="token punctuation">.</span>onselect <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	<span class="token keyword">this</span><span class="token punctuation">.</span>label <span class="token operator">=</span> <span class="token string">&apos;Thanks!&apos;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code>
 </pre>
