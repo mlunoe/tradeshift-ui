@@ -340,6 +340,11 @@
 </pre>
                         </div>
                     </figure>
+                    <div data-ts="Note">
+                        <i class="ts-icon-warning"></i>
+                        <p>The inline event listeners as shown above will simply not work with any sensible <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank">Content Security Policy</a> enabled. Use instead aforementioned JavaScript
+                            API.</p>
+                    </div>
                     <p>Finally, you can also track the state with some custom DOM events if you like.</p>
                     <figure data-ts="DoxScript" data-ts.code="function%20debug(e)%20%7B%0A%09console.log(e.type%2C%20e.target)%3B%0A%7D%0Adocument.addEventListener(&apos;ts-open&apos;%2C%20debug)%3B%0Adocument.addEventListener(&apos;ts-opened&apos;%2C%20debug)%3B%0Adocument.addEventListener(&apos;ts-close&apos;%2C%20debug)%3B%0Adocument.addEventListener(&apos;ts-closed&apos;%2C%20debug)%3B">
                         <input type="hidden" value="%7B%22show%22%3Afalse%2C%22outs%22%3Afalse%2C%22runs%22%3Afalse%2C%22flip%22%3Afalse%7D">
