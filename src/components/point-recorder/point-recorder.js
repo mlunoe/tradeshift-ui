@@ -13,9 +13,12 @@ function getRelativeCoords(event) {
  * @property {Function} onClick Callback to be called when canvas is clicked
  * @returns {PointRecoder}
  */
-export default function PointRecorder(options) {
+module.exports = function PointRecorder(options) {
   options || (options = {});
   var canvas = options.element;
+  if (canvas.nodeName !== 'CANVAS') {
+    throw new Error(`PointRecorder only works with 'HTMLCanvasElement' elements. Please provide a canvas element in options.element.`);
+  }
   var context = canvas.getContext('2d');
 
   canvas.addEventListener('click', function (event) {

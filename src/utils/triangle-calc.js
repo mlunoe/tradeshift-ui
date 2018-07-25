@@ -1,13 +1,24 @@
-function getLengths(points) {
+/**
+ * Given a list of points this function will return a list of distances between consecutive points
+ * @typedef Point
+ * @type {Object}
+ * @property {Number} x x-oordinate for point
+ * @property {Number} y y-oordinate for point
+ * 
+ * @param  {Point[]} points list of points to calculate distances between
+ * @return {Number[]} list of distances between given points
+ */
+function getDistances(points) {
   var length = points.length;
   return points.map(function (point, index) {
     var nextIndex = index + 1;
+    // When out of bounds use the initial point
     if (nextIndex === length) {
       nextIndex = 0;
     }
     var next = points[nextIndex];
     // Distance between points
-    return Math.sqrt(Math.pow(next.x - point.x, 2) + Math.pow(next.y - point.y, 2));
+    return Math.sqrt(Math.pow(Math.abs(next.x - point.x), 2) + Math.pow(Math.abs(next.y - point.y), 2));
   });
 
 }
@@ -17,25 +28,19 @@ function getLengths(points) {
  * @param  {Number[]} lengths length of each side of the triangle
  */
 function verifyTriangle(lengths) {
+  var length = lengths.length;
   if (lengths.length !== 3) {
-    throw new Error(`Cannot get triangle type with ${lengths.length} lengths. Please use 3 lengths.`);
+    throw new Error(`Cannot get triangle type with ${length} lengths. Please use 3 lengths.`);
   }
 
-  lengths.forEach(function (first, index) {
-    var secondIndex = index + 1;
-    if (secondIndex === length) {
-      secondIndex = 0;
-    }
-    var second = lengths[secondIndex];
+  var totalSideSum = lengths.reduce(function (accum, current) {
+    return accum + current;
+  });
 
-    var thirdIndex = secondIndex + 1;
-    if (thirdIndex === length) {
-      thirdIndex = 0;
-    }
-    var third = lengths[thirdIndex];
+  lengths.forEach(function (curentSide) {
     // Check Triangle Inequality Theorem
-    if (first + second <= third) {
-      throw new Error('This is not a valid triangle. The sum of two sides must be greater than the third side.');
+    if (totalSideSum - curentSide <= curentSide) {
+      throw new Error(`This is not a valid triangle. The sum of two sides must be greater than the third side. ${totalSideSum - curentSide} ≯ ${curentSide}`);
     }
   });
 }
@@ -83,8 +88,8 @@ var TRIANGLE_TYPES = {
   UNKNOWN: 'UNKNOWN'
 };
 
-export default {
-  getLengths,
+module.exports = {
+  getDistances,
   getTriangleType,
   TRIANGLE_TYPES
 };

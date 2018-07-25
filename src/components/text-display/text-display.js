@@ -10,7 +10,7 @@
  * @property {Function} onClick Callback to be called when canvas is clicked
  * @returns {PointRecoder}
  */
-export default function TextDisplay(options) {
+module.exports = function TextDisplay(options) {
   options || (options = {});
   var element = options.element;
 

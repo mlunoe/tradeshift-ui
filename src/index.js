@@ -1,6 +1,5 @@
 import PointRecorder from './components/point-recorder/point-recorder';
 import TextDisplay from './components/text-display/text-display';
-
 import triangleCalc from './utils/triangle-calc';
 
 ts.ui.ready(function() {
@@ -33,7 +32,7 @@ ts.ui.ready(function() {
     // ctx.stroke();
     
     if (points.length === 3) {
-      var lengths = triangleCalc.getLengths(points);
+      var lengths = triangleCalc.getDistances(points);
       var triangleType = triangleCalc.getTriangleType(lengths);
       textDisplay.updateDisplay(triangleType);
     }
