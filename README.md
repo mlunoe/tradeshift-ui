@@ -26,8 +26,8 @@ Then, exploring the gh-pages branch, if that might be easier to consume the comp
 
 Found resources available at:
 ```html
-	<script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.js"></script>
-	<link rel="stylesheet" href="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.css"/>
+  <script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.js"></script>
+  <link rel="stylesheet" href="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.css"/>
 ```
 
 Library is now available, but components don't display/behave correctly.
@@ -38,6 +38,15 @@ Discovering that there is some page context (classes and elements, etc.) which c
 Moving on to not spend too much time on this, since I might not need these types of components.
 
 The core problem can be solved using just these components and plain old JavaScript, so I will refrain from adding a framework to the solution.
+
+### Setting up a project structure
+
+Setting up a simple webpack build seems to be the easiest approach (considering this project might grow).
+
+On initial setup, when the page is resized I see the following error:
+`Uncaught TypeError: Cannot read property 'tabs' of null ts-11.0.0-beta.11.js:47459`
+
+I am expecting this to be due to the library expecting a certain context? I can't really find any documentation or bug reports on this.
 
 ### Core problem
 
@@ -65,7 +74,7 @@ Given lengths x,y,z
 
  edge-cases:
  - Can the lengths form a triangle?
- 	- Triangle Inequality Theorem: This theorem simply states that the sum of two sides of a triangle must be greater than the third side.
+  - Triangle Inequality Theorem: This theorem simply states that the sum of two sides of a triangle must be greater than the third side.
  - Does the input hold more or less than three lengths?
  - 
 
