@@ -5,81 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width"/>
     <script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
     <link rel="stylesheet" href="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.css"/>
-    <script type="text/javascript">
-      ts.ui.ready(function() {
-        // console.log('ready')
-        // ts.ui.get('#mytabbar', function(tabbar) {
-        //   console.log(tabbar)
-        //   tabbar.tabs([
-        //     { label: 'One' },
-        //     { label: 'Two' },
-        //     { label: 'Three', onselect() {
-        //       console.log('selected');
-        //     }}
-        //   ]);
-        // });
-        // ts.ui.TopBar.tabs([
-        //   {label: 'Overview'},
-        //   {label: 'TopBar'},
-        //   {label: 'TabBar'},
-        //   {label: 'ToolBar'},
-        //   {label: 'StatusBar'}
-        // ]);
+    <style type="text/css">
 
+      .point-recorder {
+        background-color: lightgray;
+      }
 
-        // ts.ui.Dialog.confirm('Will you try?', {
-        //   onaccept: function() {
-        //     ts.ui.Notification.success('Good luck');
-        //   },
-        //   oncancel: function() {
-        //     ts.ui.Notification.success('Come back later');
-        //   }
-        // });
-
-        // ts.ui.Footer.buttons({
-        //   label: 'Continue',
-        //   type: 'ts-primary',
-        //   onclick: function() {
-        //     top.location.hash = 'components/footer/buttons.html';
-        //   }
-        // });
-        ts.ui.get('#mystaticautocomplete', function(autocomplete) {
-          autocomplete.data([
-            { key: 0, value: 'zero' },
-            { key: 1, value: 'one' },
-            { key: 2, value: 'two' },
-            { key: 3, value: 'three' },
-            { key: 4, value: 'four' },
-            { key: 5, value: 'five' },
-            { key: 6, value: 'six' },
-            { key: 7, value: 'seven' },
-            { key: 8, value: 'eight' },
-            { key: 9, value: 'nine' }
-          ]);
-        });
-      });
-    </script>
+    </style>
   </head>
   <body>
-    <header data-ts="TabBar"></header>
-    <h1>Hello World</h1>
-    <!-- <i class="ts-icon-myapps"></i> -->
-    <div id="mytabbar"></div>
-    <!-- <div data-ts="App" data-ts.busy="string or boolean"></div> -->
-
-    <form data-ts="Form" action="javascript:alert('Form submitted')">
-      <fieldset>
-        <!-- <label>
-          <span>Press SHIFT to ENTER newlines</span>
-          <input type="submit"></input>
-        </label> -->
-        <input data-ts="AutoComplete" id="mystaticautocomplete" data-ts-spirit="ts.ui.AutocompleteInputSpirit" class="ts-autocomplete ts-input ts-spirit ts-field ts-text" spellcheck="false" autocomplete="off">
-        <button type="submit">Palle</button>
-      </fieldset>
-    </form>
-    <!-- <div data-ts="CompanyCard" id="mycard"></div> -->
-    <!-- <footer>This is my footer</footer> -->
-    <script type="text/javascript" src="./index.js"></script>
+    <div id="app">
+      <h1>Triangle Type Recognizer</h1>
+      <p>Draw three points on the canvas below and we'll display the type below</p>
+      <canvas width="400" height="200" class="point-recorder"></canvas>
+      <p class="text-display"></p>
+    </div>
   </body>
 </html>
