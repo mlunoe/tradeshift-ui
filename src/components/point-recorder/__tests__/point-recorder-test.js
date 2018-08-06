@@ -7,26 +7,48 @@ describe('PointRecorder', function () {
   jsdom();
 
   describe('#constructor()', function () {
+    var getSpy;
+
+    before(function () {
+      getSpy = sinon.spy();
+
+      // Mocking global property 'ts'
+      global.ts = {
+        ui: {
+          get: getSpy
+        }
+      };
+    });
+
+    after(function () {
+      // Clean up global property
+      delete global.ts;
+    })
+
     it('should throw if it does not receive a canvas element', function () {
-      var div = document.createElement('div');
+      var pointRecorderElement = document.createElement('div');
       var shouldThrow = function () {
-        new PointRecorder({ element: div });
+        new PointRecorder({ element: pointRecorderElement });
       };
       assert.throws(shouldThrow);
     });
 
     it('should not throw if it receives a canvas element', function () {
+      var pointRecorderElement = document.createElement('div');
       var canvas = document.createElement('canvas');
+      pointRecorderElement.appendChild(canvas);
       var shouldNotThrow = function () {
-        new PointRecorder({ element: canvas });
+        new PointRecorder({ element: pointRecorderElement });
       }
       assert.doesNotThrow(shouldNotThrow);
     });
 
     it('should attach provided click handler', function () {
+      var pointRecorderElement = document.createElement('div');
       var canvas = document.createElement('canvas');
+      pointRecorderElement.appendChild(canvas);
       var onClickSpy = sinon.spy();
-      new PointRecorder({ element: canvas, onClick: onClickSpy });
+      new PointRecorder({ element: pointRecorderElement, onClick: onClickSpy });
 
       // Simulate click event
       var event = document.createEvent("HTMLEvents");
@@ -37,7 +59,10 @@ describe('PointRecorder', function () {
     });
 
     it('should use fillRect to draw on the canvas', function () {
+      var pointRecorderElement = document.createElement('div');
       var canvas = document.createElement('canvas');
+      pointRecorderElement.appendChild(canvas);
+      
       canvas.width = 100;
       canvas.height = 200;
       var clearRectSpy = sinon.spy();
@@ -49,12 +74,22 @@ describe('PointRecorder', function () {
         }
       };
       
-      var pointRecorder = new PointRecorder({ element: canvas });
+      var pointRecorder = new PointRecorder({ element: pointRecorderElement });
       pointRecorder.clear();
       pointRecorder.drawPoint(1, 2, 3, 4);
 
       sinon.assert.calledWith(clearRectSpy, 0, 0, 100, 200);
       sinon.assert.calledWith(fillRectSpy, 1, 2, 3, 4);
+    });
+
+    it('should use the ts.ui.get API to get the board element', function () {
+      var pointRecorderElement = document.createElement('div');
+      var canvas = document.createElement('canvas');
+      pointRecorderElement.appendChild(canvas);
+      var onClickSpy = sinon.spy();
+      new PointRecorder({ element: pointRecorderElement, onClick: onClickSpy, title: 'foo' });
+      
+      sinon.assert.calledWith(getSpy, pointRecorderElement);
     });
   });
 });

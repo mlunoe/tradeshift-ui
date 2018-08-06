@@ -5,7 +5,7 @@ import triangleCalc from './utils/triangle-calc';
 ts.ui.ready(function() {
   var app = document.querySelector('#app');
   var textDisplayElm = app.querySelector('.text-display');
-  var textDisplay = new TextDisplay({element: textDisplayElm});
+  var textDisplay = new TextDisplay({element: textDisplayElm, prefix: 'Triangle Type: '});
 
   var points = [];
   var pointRecorder;
@@ -39,5 +39,5 @@ ts.ui.ready(function() {
   }
 
   var pointRecorderElm = app.querySelector('.point-recorder');
-  pointRecorder = new PointRecorder({ onClick: onClick, element: pointRecorderElm });
+  pointRecorder = new PointRecorder({ onClick: onClick, element: pointRecorderElm, title: 'Triangle Type Recognizer' });
 });

@@ -15,7 +15,17 @@ function getRelativeCoords(event) {
  */
 module.exports = function PointRecorder(options) {
   options || (options = {});
-  var canvas = options.element;
+  var element = options.element;
+  var title = options.title;
+  var canvas = element.querySelector('canvas');
+
+  // Adds a title to the board, if it exists
+  if (title) {
+    ts.ui.get(element, function(board) {
+      board.title(title);
+    });
+  }
+
   if (canvas.nodeName !== 'CANVAS') {
     throw new Error(`PointRecorder only works with 'HTMLCanvasElement' elements. Please provide a canvas element in options.element.`);
   }

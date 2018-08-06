@@ -13,6 +13,10 @@
 module.exports = function TextDisplay(options) {
   options || (options = {});
   var element = options.element;
+  var prefix = options.prefix || '';
+  if (typeof prefix !== 'string') {
+    throw new Error(`TextDisplay can only accept string prefixs. Received type "${typeof prefix}".`);
+  }
 
   return {
     updateDisplay: function (value) {
@@ -26,7 +30,7 @@ module.exports = function TextDisplay(options) {
         element.classList.add('hidden');  
       }
 
-      element.innerHTML = value;
+      element.innerHTML = `${prefix}${value}`;
     }
   };
 };
