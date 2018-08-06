@@ -58,6 +58,21 @@ describe('PointRecorder', function () {
       sinon.assert.calledOnce(onClickSpy);
     });
 
+    it('should attach provided mousemove handler', function () {
+      var pointRecorderElement = document.createElement('div');
+      var canvas = document.createElement('canvas');
+      pointRecorderElement.appendChild(canvas);
+      var onMoveSpy = sinon.spy();
+      new PointRecorder({ element: pointRecorderElement, onMove: onMoveSpy });
+
+      // Simulate mousemove event
+      var event = document.createEvent("HTMLEvents");
+      event.initEvent("mousemove", false, true);
+      canvas.dispatchEvent(event);
+
+      sinon.assert.calledOnce(onMoveSpy);
+    });
+
     it('should use fillRect to draw on the canvas', function () {
       var pointRecorderElement = document.createElement('div');
       var canvas = document.createElement('canvas');

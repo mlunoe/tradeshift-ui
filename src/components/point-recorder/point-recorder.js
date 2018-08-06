@@ -31,12 +31,19 @@ module.exports = function PointRecorder(options) {
   }
   var context = canvas.getContext('2d');
 
-  canvas.addEventListener('click', function (event) {
-    if (options.onClick) {
+  if (options.onClick) {
+    canvas.addEventListener('click', function (event) {
       var coordinates = getRelativeCoords(event, canvas);
       options.onClick(context, coordinates);
-    }
-  });
+    });
+  }
+
+  if (options.onMove) {
+    canvas.addEventListener('mousemove', function (event) {
+      var coordinates = getRelativeCoords(event, canvas);
+      options.onMove(context, coordinates);
+    });
+  }
 
   return {
     clear: function () {

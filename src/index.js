@@ -4,11 +4,20 @@ import triangleCalc from './utils/triangle-calc';
 
 ts.ui.ready(function() {
   var app = document.querySelector('#app');
-  var textDisplayElm = app.querySelector('.text-display');
-  var textDisplay = new TextDisplay({element: textDisplayElm, prefix: 'Triangle Type: '});
+  var resultsDisplayElm = app.querySelector('.results-display');
+  var coordDisplayElm = app.querySelector('.coordinates-display');
+  var resultsDisplay = new TextDisplay({element: resultsDisplayElm, prefix: 'Triangle Type: '});
+  var coordDisplay = new TextDisplay({element: coordDisplayElm, prefix: 'Coordinates: '});
 
   var points = [];
   var pointRecorder;
+  var onMove = function (context, coordinates) {
+    if (!pointRecorder) {
+      throw new Error('PointRecorder not initialized!');
+    }
+    coordDisplay.updateDisplay(`X: ${coordinates.x}, Y: ${coordinates.y}`)
+  };
+
   var onClick = function (context, coordinates) {
     if (!pointRecorder) {
       throw new Error('PointRecorder not initialized!');
@@ -18,7 +27,7 @@ ts.ui.ready(function() {
       points = [];
       // Clear canvas
       pointRecorder.clear();
-      textDisplay.updateDisplay('');
+      resultsDisplay.updateDisplay('');
     }
 
     pointRecorder.drawPoint(coordinates.x, coordinates.y, 3, 3);
@@ -34,10 +43,10 @@ ts.ui.ready(function() {
     if (points.length === 3) {
       var lengths = triangleCalc.getDistances(points);
       var triangleType = triangleCalc.getTriangleType(lengths);
-      textDisplay.updateDisplay(triangleType);
+      resultsDisplay.updateDisplay(triangleType);
     }
   }
 
   var pointRecorderElm = app.querySelector('.point-recorder');
-  pointRecorder = new PointRecorder({ onClick: onClick, element: pointRecorderElm, title: 'Triangle Type Recognizer' });
+  pointRecorder = new PointRecorder({ onClick: onClick, onMove: onMove, element: pointRecorderElm, title: 'Triangle Type Recognizer' });
 });
