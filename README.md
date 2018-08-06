@@ -1,91 +1,133 @@
-[![travis.org Build Status](https://travis-ci.org/Tradeshift/tradeshift-ui.svg?branch=master)](https://travis-ci.org/Tradeshift/tradeshift-ui)
-[![devDependencies](https://img.shields.io/david/dev/Tradeshift/tradeshift-ui.svg?style=flat-square)](https://david-dm.org/Tradeshift/tradeshift-ui/?type=dev)
-___
+## Problem statement
 
-# [Tradeshift UI](http://ui.tradeshift.com)
+### Triangle challenge (TS UI)
 
-Tradeshift UI is a UI library to help you create apps that implement the [Tradeshift Design Principles](http://ui.tradeshift.com/#design/).
-Check out our [documentation site](http://ui.tradeshift.com) to learn more about how it works and try out live code examples.
+Write a program that will determine the type of a triangle. It should take the lengths of the triangle's three sides as input, and return whether the triangle is equilateral, isosceles or scalene.
 
-If you want to know about what the latest version is and what's new, check out our [releases page](http://github.com/Tradeshift/tradeshift-ui/releases).
+We are looking for solutions that showcase problem solving skills and structural considerations that can be applied to larger and potentially more complex problem domains. Pay special attention to tests, readability of code and error cases.
 
-If you'd like to submit a feature request or report a bug, go to our [issues pages](http://github.com/Tradeshift/tradeshift-ui/issues).
+It would be great if you build the UI with our components: 
+http://ui.tradeshift.com/ & https://github.com/Tradeshift/tradeshift-ui
 
-## Installation
+The way you reflect upon your decisions is important to us, why we ask you to include a brief discussion of your design decisions and implementation choices.
 
-1. Clone this repository
-1. Install [NodeJS](https://nodejs.org/), either LTS or current.
-1. Install [yarn](https://yarnpkg.com/en/docs/install), a nice package manager.
-1. Install the Grunt Command Line Utility globally.
-	- `yarn global add grunt-cli`
-1. Install the dependencies of this project.
-	- `yarn`
+The resulting code and discussion is vital for us and will be used as a way for us to validate your engineering skills. After having reviewed your code, we’ll decide on next step.
 
-## Usage (Local Development)
+Please put the solution up on GitHub and send the link to me. If you have some other code that you are proud of then please send that too.
 
-1. Start the `grunt` script in the root of the repository.
-	- `grunt`
-1. Use [`http://localhost:10111/dist/ts.js`](`http://localhost:10111/dist/ts.js`) in your app running locally to initialize Tradeshift UI.
-1. Whenever you modify the source files, the script will rebuild the distribution files in `dist/` so you're always using the latest version.
+## How to use this app
 
-### Optional steps to run the documentation site locally
+This application is a solution to the problem statement above. It takes a structural approach to solve the problem and considers the functional aspect of it, as well as the end user.
 
-1. Run `grunt dev` (instead of just `grunt`) and the documentantion website will open up on [`http://localhost:10114/`](http://localhost:10114/)
-1. Whenever you modify the source files, the script will rebuild the documentation so you're always using the latest version.
+To run this application and see it in action run the following commands:
 
-## Git Hooks
-
-Watch out, whenever you create a commit, the pre-commit hook will generate the documentation files, so the committed version works with GitHub pages.
-
-## Documentation
-
-If you want to browse our [documentation site](http://ui.tradeshift.com) you can do so easily.
-
-## Release & Deployment
-
-Make sure you have the following environment variables set:
-```
-export AWS_ACCESS_KEY_ID=[Your AWS Access Key ID]
-export AWS_SECRET_ACCESS_KEY=[Your AWS Secret Access Key]
+```sh
+$ yarn
+$ yarn start
 ```
 
-If you have the correct AWS access keys to release a new version of tradeshift-ui, you can do so using the `yarn run release` or `yarn run prerelease` commands.
-It will bump the version inside `package.json`, commit, tag release, upload to S3/CloudFront and push to GitHub. Make sure to not do this on the `master` branch because it is protected from being pushed to directly.
+Open up [http://localhost:8080/](http://localhost:8080/) to see the running application.
 
-## Running tests
-
-Make sure you have a BrowserStack Automate account and have the following environment variables set:
-```
-export BROWSERSTACK_USERNAME=[Your BrowserStack username]
-export BROWSERSTACK_KEY=[Your BrowserStack key]
+To run the test suite, run the following command:
+```sh
+$ yarn test
 ```
 
-Then feel free to start running the tests as such:
+Below you will find the thought process of building this solution.
 
-`yarn test`
+Central pieces of the application:
+- The [PointRecorder](https://github.com/mlunoe/tradeshift-ui/blob/master/src/components/point-recorder/point-recorder.js) component provides functionality for recording points, given a canvas element
+- The [TextDisplay](https://github.com/mlunoe/tradeshift-ui/blob/master/src/components/text-display/text-display.js) component provides functionality for rendering and updating text in an orderly fashion
+- The [triangle-calc.js](https://github.com/mlunoe/tradeshift-ui/blob/master/src/utils/triangle-calc.js) is a collection of utility functions that provides calculations concerning triangles
 
-This command will run all the Jasmine tests for all UI Components through BrowserStack.
+Limitations:
+- This is not a full-fletched application. It takes a minimal approach by using the Tradeshift UI components (and no framework) to get something displayed on the page
+- It places the style globally on the page and does not seek to solve the problem of organising styles next to functionality
+- It also uses global templates defined on the index.html page and does not seek to solve the problem of organising them next to functionality
 
-We're currently testing on the following browsers:
-* Google Chrome (latest, previous)
-* Mozilla Firefox (latest, previous)
-* Apple Safari (latest, previous)
-* Microsoft Edge (latest, previous)
-* IE11
+## Discussion
 
-## Roadmap
-To stay up to date with upcoming releases and new features in the works, check out our [Milestones](https://github.com/Tradeshift/tradeshift-ui/milestones).
+If this were to be used in production, it would be beneficial to add some sort of JavaScript framework to solve the organisation problems this solution clearly suffers from.
 
-## Contribute
+This could be a similar structure to how the Tradeshift UI components are built, but ideally, as an extension of the existing components!
 
-If you would like to contribute to our codebase, just fork the repo and make a PR or just write to us on [Gitter](https://gitter.im/tradeshift-ui/Lobby), we're always looking for more input =)
+I decided to go with a minimal solution to get something working in a short amount of time and not having, for the challenge, unnessary overhead.
 
-## License
+Finally, this minimal structure should make it easy to transfer into any new framework (templates, styles and functionality) as it has no other dependency than the Tradeshift UI components.
 
-* You can always create forks on GitHub, submit Issues and Pull Requests.
-* You can only use Tradeshift-UI to make apps on a Tradeshift platform, e.g. tradeshift.com.
-* You can fix a bug until the bugfix is deployed by Tradeshift.
-* You can host Tradeshift UI yourself.
-* If you want to make a bigger change or just want to talk with us, reach out to our team here on GitHub.
+## Thought process
 
-You can read the actual license agreement in the [LICENSE.md](https://github.com/Tradeshift/tradeshift-ui/blob/master/LICENSE.md).
+### Consuming components
+
+Looking around the tradeshift UI repo, there is no immediate way of consuming the components.
+First, I'll try to fork the repository to use the code and styles provided.
+
+Then, exploring the gh-pages branch, if that might be easier to consume the components from. Components seem pretty integrated.
+
+Found resources available at:
+```html
+  <script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.js"></script>
+  <link rel="stylesheet" href="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.css"/>
+```
+
+Library is now available, but components don't display/behave correctly.
+It seems like they need jquery? Adding that did not change anything.
+
+Dialog seems to work! But Note doesn't. Icons work. Footer doesn't. Input autocomplete works.
+Discovering that there is some page context (classes and elements, etc.) which certain components behave around.
+Moving on to not spend too much time on this, since I might not need these types of components.
+
+The core problem can be solved using just these components and plain old JavaScript, so I will refrain from adding a framework to the solution.
+
+I later found and read the getting started page, which could have spared me some time figuring out how to consume the components. See [Setting up a project structure](https://github.com/mlunoe/tradeshift-ui/tree/master#setting-up-a-project-structure).
+
+### Setting up a project structure
+
+Setting up a simple webpack build seems to be the easiest approach (considering this project might grow).
+
+On initial setup, when the page is resized I see the following error:
+`Uncaught TypeError: Cannot read property 'tabs' of null ts-11.0.0-beta.11.js:47459`
+
+I am expecting this to be due to the library expecting a certain context? I can't really find any documentation or bug reports on this.
+
+I found the getting started page (which I probably should have read from the very beginning), which explained a few things for me.
+I also found that having the tabs element on my page probably caused the error I was seeing.
+
+Introducing point-recorder and text-display components along with a util file to allow for some component-like structure in the application.
+
+### Core problem
+
+Given lengths x,y,z
+```js
+  // Inital naiive approach
+  // check all lengths against each other
+  // worst-case runtime O(n^2), though we are talking n=3
+
+  map = new Map()
+  for each l in lengths
+    if (!map[l]) {
+      map[l] = 0
+    }
+    map[l]++
+  result = 0
+  for each t in map
+    if t > result
+      result = t
+  return result;
+  // worst-case runtime O(n)
+
+  case: 0 equal lengths => scalene
+  case: 2 equal lengths => isosceles
+  case: 3 equal lengths => equilateral
+```
+
+Edge cases:
+- Can the lengths form a triangle?
+  - Triangle Inequality Theorem: This theorem simply states that the sum of two sides of a triangle must be greater than the third side.
+- Does the input hold more or less than three lengths?
+
+### Presenting the problem for the user
+
+A simple presentation would be to display three inputs to type in numbers and then provide the result on submit.
+
+Something more involved could be a file-upload function (e.g. csv) or drawing feature, where the user can select three points and it will tell the result.

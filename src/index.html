@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html class="ts-loading ts-bg-dark">
+  <head>
+    <title>Tradeshift UI Challenge</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+    <script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+    <link rel="stylesheet" href="//d5wfroyti11sa.cloudfront.net/prod/client/ts-11.0.0-beta.11.min.css"/>
+    <style type="text/css">
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .point-recorder canvas {
+        background-color: lightgray;
+        cursor: pointer;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-ts="Board" class="point-recorder">
+        <div data-ts="Panel">
+          <p>
+            Mark three points on the canvas below and we'll display the type. 
+            <a data-ts="Button" class="ts-primary" href="https://en.wikipedia.org/wiki/Triangle#By_lengths_of_sides" target="_blank">
+              <span style="display:none;">What does triangle types mean?</span>
+              <i class="ts-icon-question"></i>
+            </a>
+          </p>
+          <canvas width="400" height="200"></canvas>
+          <p class="coordinates-display"></p>
+          <p class="results-display"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
