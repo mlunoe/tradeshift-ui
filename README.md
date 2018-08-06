@@ -42,8 +42,20 @@ Central pieces of the application:
 
 Limitations:
 - This is not a full-fletched application. It takes a minimal approach by using the Tradeshift UI components (and no framework) to get something displayed on the page
+- It places the style globally on the page and does not seek to solve the problem of organising styles next to functionality
+- It also uses global templates defined on the index.html page and does not seek to solve the problem of organising them next to functionality
 
-## Thought process:
+## Discussion
+
+If this were to be used in production, it would be beneficial to add some sort of JavaScript framework to solve the organisation problems this solution clearly suffers from.
+
+This could be a similar structure to how the Tradeshift UI components are built, but ideally, as an extension of the existing components!
+
+I decided to go with a minimal solution to get something working in a short amount of time and not having, for the challenge, unnessary overhead.
+
+Finally, this minimal structure should make it easy to transfer into any new framework (templates, styles and functionality) as it has no other dependency than the Tradeshift UI components.
+
+## Thought process
 
 ### Consuming components
 
